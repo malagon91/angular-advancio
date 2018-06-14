@@ -1,10 +1,9 @@
 <div class="big-padding text-center blue-grey white-text">
     <h1>Dashboard</h1>
 </div>
-<div class="container white">
-    <div style="display: block">
-        <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true">
+
+<div style="display: block;" *ngIf="isDataAvailable" class="container white">
+    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true">
     </canvas>
 
-    </div>
 </div>

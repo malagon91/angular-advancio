@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
  sum: Summary[];
  public chartType:string = 'bar';
  Chart:any;
+ public isDataAvailable:boolean = false;
+
 
  public chartDatasets:Array<any> = [
      {data: [], label: 'Sales data'},
@@ -51,6 +53,9 @@ export class HomeComponent implements OnInit {
       this.sum.forEach(item =>{
         this.chartDatasets[0].data.push(item.total);
         this.chartLabels.push(item.name);
+        console.log(this.chartDatasets);
+        this.isDataAvailable = true;
+
       });
     });
   }
