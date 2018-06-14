@@ -1,3 +1,5 @@
+import { ChartsModule } from 'angular-bootstrap-md';
+import { SummaryService } from './summary.service';
 import { MissingComponent } from './missing/missing.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -48,10 +50,10 @@ const appRoutes: Routes = [
       appRoutes,
       {  } // <-- debugging purposes only
     ),
-    BrowserModule,JsonpModule,HttpClientModule, HttpModule,FormsModule,Ng2OrderModule
+    BrowserModule,JsonpModule,HttpClientModule, HttpModule,FormsModule,Ng2OrderModule,ChartsModule
 
   ],
-  providers: [RepresentativeSvrService,TransactionsService],
+  providers: [RepresentativeSvrService,TransactionsService,SummaryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
