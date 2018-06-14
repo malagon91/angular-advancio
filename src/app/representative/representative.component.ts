@@ -1,3 +1,4 @@
+import { PaginatedRep } from './../paginateRepresentative';
 import { Representative } from './../Representative';
 import { RepresentativeSvrService } from './../representative-svr.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 export class RepresentativeComponent implements OnInit {
   Representatives: Representative[];
   Repr: Representative;
+  PagRep: PaginatedRep;
    //sorting
    key: string = 'name'; //set default
    reverse: boolean = false;
@@ -25,7 +27,7 @@ export class RepresentativeComponent implements OnInit {
   constructor(private _serv: RepresentativeSvrService) { }
 
   ngOnInit() {
-    this._serv.getRepre().subscribe(result => this.Representatives = result);
+    this._serv.getRepre().subscribe(result => this.PagRep = result);
     this.newRep();
 
   }
@@ -39,7 +41,7 @@ export class RepresentativeComponent implements OnInit {
   saveRep(){
     this.saving = true;
     this._serv.saveRep(this.Repr).subscribe(result => {
-      this._serv.getRepre().subscribe(result => this.Representatives = result);
+      this._serv.getRepre().subscribe(result => this.PagRep = result);
       this.saving = false;
       this.newRep();
       console.log(result);
@@ -47,10 +49,17 @@ export class RepresentativeComponent implements OnInit {
     })
 
   }
+  prevPage() {
+    this._serv.getRepreUrl(this.PagRep.prev_page_url).subscribe(result=>this.PagRep = result);
+  }
+
+  nextPage() {
+    this._serv.getRepreUrl(this.PagRep.next_page_url).subscribe(result=>this.PagRep = result);
+  }
   deleteRep(Rep: Representative){
     this.saving = true;
     this._serv.deleteRep(Rep).subscribe(result => {
-      this._serv.getRepre().subscribe(result => this.Representatives = result);
+      this._serv.getRepre().subscribe(result => this.PagRep = result);
       this.saving = false;
       this.newRep();
       console.log(result);

@@ -71,7 +71,7 @@
             <td>Actions</td>
         </thead>
         <tbody>
-            <tr *ngFor="let item of Trans | orderBy: 'id' : reverse">
+            <tr *ngFor="let item of PageTran.data | orderBy: 'id' : reverse">
                 <td>{{item.id}}
                 </td>
                 <td>{{item.representative.name}}</td>
@@ -87,4 +87,8 @@
             </tr>
         </tbody>
     </table>
+    <p>Showing {{PageTran.from}} to {{PageTran.to}} of {{PageTran.total}}</p>
+    <p>Page {{PageTran.current_page}} of {{PageTran.last_page}}</p>
+    <button (click)="prevPage()" [disabled]="!PageTran.prev_page_url">Prev</button>
+    <button (click)="nextPage()" [disabled]="!PageTran.next_page_url">Next</button>
 </div>

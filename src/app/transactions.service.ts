@@ -22,6 +22,11 @@ export class TransactionsService {
     return this._http.get('http://localhost/api/transactionapi', {})
     .map(response  => response.json());
 }
+
+getTransUrl(url:string){
+  return this._http.get(url, {})
+  .map(response  => response.json());
+}
 getRepCombo(){
   return this._http.get('http://localhost/api/representativescbx', {})
   .map(response  => response.json());

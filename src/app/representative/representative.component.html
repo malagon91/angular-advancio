@@ -68,7 +68,7 @@
             <td>Actions</td>
         </thead>
         <tbody>
-            <tr *ngFor="let rep of Representatives | orderBy: 'id' : reverse">
+            <tr *ngFor="let rep of PagRep.data | orderBy: 'id' : reverse">
                 <td>{{rep.id}}
                 </td>
                 <td>{{rep.name}}</td>
@@ -84,4 +84,8 @@
             </tr>
         </tbody>
     </table>
+    <p>Showing {{PagRep.from}} to {{PagRep.to}} of {{PagRep.total}}</p>
+    <p>Page {{PagRep.current_page}} of {{PagRep.last_page}}</p>
+    <button (click)="prevPage()" [disabled]="!PagRep.prev_page_url">Prev</button>
+    <button (click)="nextPage()" [disabled]="!PagRep.next_page_url">Next</button>
 </div>

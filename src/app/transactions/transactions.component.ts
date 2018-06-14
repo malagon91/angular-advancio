@@ -2,6 +2,7 @@ import { Repcbx } from './../Repcbx';
 import { TransactionsService } from './../transactions.service';
 import { Transaction } from './../Transaction';
 import { Component, OnInit } from '@angular/core';
+import { PaginatedTran } from '../PaginatedTran';
 
 @Component({
   selector: 'app-transactions',
@@ -12,6 +13,7 @@ export class TransactionsComponent implements OnInit {
   Tran: Transaction;
   Trans: Transaction[];
   Reps: Repcbx[];
+  PageTran: PaginatedTran;
    //sorting
    key: string = 'id'; //set default
    reverse: boolean = false;
@@ -20,8 +22,15 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit() {
     this._srv.getRepCombo().subscribe(result => this.Reps = result);
-    this._srv.getTrans().subscribe(result => this.Trans = result);
+    this._srv.getTrans().subscribe(result => this.PageTran = result);
     this.clearModel();
+  }
+  prevPage() {
+    this._srv.getTransUrl(this.PageTran.prev_page_url).subscribe(result=>this.PageTran = result);
+  }
+
+  nextPage() {
+    this._srv.getTransUrl(this.PageTran.next_page_url).subscribe(result=>this.PageTran = result);
   }
   clearModel(){
     this.Tran = new Transaction();
@@ -37,7 +46,7 @@ export class TransactionsComponent implements OnInit {
   saveTran(){
     this.saving = true;
     this._srv.saveTran(this.Tran).subscribe(result => {
-      this._srv.getTrans().subscribe(result => this.Trans = result);
+      this._srv.getTrans().subscribe(result => this.PageTran = result);
       this.saving = false;
       this.clearModel();
     })
@@ -48,7 +57,7 @@ export class TransactionsComponent implements OnInit {
   deleteTran(id:number){
     this.saving = true;
     this._srv.deleteTran(id).subscribe(result => {
-      this._srv.getTrans().subscribe(result => this.Trans = result);
+      this._srv.getTrans().subscribe(result => this.PageTran = result);
       this.saving = false;
       this.clearModel();
       console.log(result);

@@ -26,6 +26,12 @@ export class RepresentativeSvrService {
 
 
   }
+  getRepreUrl(url:string){
+    return this._http.get(url, {})
+    .map(response  => response.json());
+
+
+}
   saveRep(rep: Representative){
     return this._http.post('http://localhost/api/representativeapi', JSON.stringify(rep), {headers: this.headers})
     	           .map(res => res.json());
