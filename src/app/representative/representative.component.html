@@ -1,0 +1,87 @@
+<div class="big-padding text-center blue-grey white-text">
+    <h1>Admin your Vendors</h1>
+</div>
+<div class="container white">
+    <div class="container back-space border-bottom">
+        <h1>Representative</h1>
+        <form>
+            <div class="form-group">
+                <label for="id">Id</label>
+                <input type="text" class="form-control" id="id" [(ngModel)]="Repr.id" [ngModelOptions]="{standalone: true}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="Repr.name" [ngModelOptions]="{standalone: true}" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="Repr.email" [ngModelOptions]="{standalone: true}" id="email">
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of the birth</label>
+                <input type="date" class="form-control" [(ngModel)]="Repr.dob" [ngModelOptions]="{standalone: true}" id="dob">
+            </div>
+            <div class="form-group">
+                <label for="schema">Schema</label>
+                <input type="text" class="form-control" [(ngModel)]="Repr.schema" [ngModelOptions]="{standalone: true}" id="schema">
+            </div>
+            <div class="form-group">
+                <label for="curp">Curp</label>
+                <input type="text" class="form-control" [(ngModel)]="Repr.curp" [ngModelOptions]="{standalone: true}" id="curp">
+            </div>
+            <div class="form-group">
+                <label for="rfc">Rfc</label>
+                <input type="text" class="form-control" [(ngModel)]="Repr.rfc" [ngModelOptions]="{standalone: true}" id="rfc">
+            </div>
+
+            <div *ngIf="!saving">
+                <button type="submit" class="btn btn-success" (click)="saveRep()">Save</button>
+                <button type="submit" class="btn btn-primary" (click)="newRep()">New</button>
+            </div>
+            <span *ngIf="saving"><i class="fas fa-spinner" ></i> Loading</span>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <td (click)="sort('id')">ID
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('name')">Name
+                <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('email')">Email
+                <span class="glyphicon sort-icon" *ngIf="key =='email'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('dob')">Date Of Birth
+                <span class="glyphicon sort-icon" *ngIf="key =='dob'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('schema')">Schema
+                <span class="glyphicon sort-icon" *ngIf="key =='schema'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('curp')">Curp
+                <span class="glyphicon sort-icon" *ngIf="key =='curp'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('rfc')">RFC
+                <span class="glyphicon sort-icon" *ngIf="key =='rfc'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td>Actions</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rep of Representatives | orderBy: 'id' : reverse">
+                <td>{{rep.id}}
+                </td>
+                <td>{{rep.name}}</td>
+                <td>{{rep.email}}</td>
+                <td>{{rep.dob}}</td>
+                <td>{{rep.schema}}</td>
+                <td>{{rep.curp}}</td>
+                <td>{{rep.rfc}}</td>
+                <td>
+                    <button type="submit" class="btn btn-primary" (click)="updateRep(rep)">Update</button>
+                    <button type="submit" class="btn btn-warning" (click)="deleteRep(rep)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="home">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand white-text" routerLink="/" routerLinkActive="active">
+          ADVANCIO
+      </a>
+        <ul class="navbar-nav mr-auto margin-left">
+            <li class="nav-item">
+                <a class="nav-link white-text" routerLink="/home" routerLinkActive="active">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text" routerLink="/representative" routerLinkActive="active">Representatives</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link white-text" routerLink="/transaction" routerLinkActive="active">Transactions</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="bg-body">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

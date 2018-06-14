@@ -1,0 +1,90 @@
+<div class="big-padding text-center blue-grey white-text">
+    <h1>Create new Transaction</h1>
+</div>
+<div class="container white">
+    <div class="container back-space">
+        <h1>Transaction</h1>
+        <form>
+            <div class="form-group">
+                <label for="id">Id</label>
+                <input type="text" class="form-control" id="id" [(ngModel)]="Tran.id" [ngModelOptions]="{standalone: true}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="rep">Representative</label>
+                <select [(ngModel)]="Tran.representative_id" class="form-control selectpicker" id="rep" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let rep of Reps" [ngValue]="rep.id">{{rep.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" min="0" max="99999" [(ngModel)]="Tran.amount" [ngModelOptions]="{standalone: true}" id="amount">
+            </div>
+            <div class="form-group">
+                <label for="due_date">Due Date</label>
+                <input type="date" class="form-control" [(ngModel)]="Tran.due_date" [ngModelOptions]="{standalone: true}" id="due_date">
+            </div>
+            <div class="form-group">
+                <label for="customer_name">Customer Name</label>
+                <input type="text" class="form-control" [(ngModel)]="Tran.customer_name" [ngModelOptions]="{standalone: true}" id="customer_name">
+            </div>
+            <div class="form-group">
+                <label for="wtp">Way to Pay</label>
+                <input type="text" class="form-control" [(ngModel)]="Tran.wtp" [ngModelOptions]="{standalone: true}" id="wtp">
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <input type="text" class="form-control" [(ngModel)]="Tran.notes" [ngModelOptions]="{standalone: true}" id="notes">
+            </div>
+
+            <div *ngIf="!saving">
+                <button type="submit" class="btn btn-success" (click)="saveTran()">Save</button>
+                <button type="submit" class="btn btn-primary" (click)="clearModel()">New</button>
+            </div>
+            <span *ngIf="saving"><i class="fas fa-spinner" ></i> Loading</span>
+        </form>
+
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <td (click)="sort('id')">ID
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('name')">Representative
+                <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('amount')">Amount
+                <span class="glyphicon sort-icon" *ngIf="key =='amount'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('due_date')">Due Date
+                <span class="glyphicon sort-icon" *ngIf="key =='due_date'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('customer_name')">Customer
+                <span class="glyphicon sort-icon" *ngIf="key =='customer_name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('wtp')">Way to pay
+                <span class="glyphicon sort-icon" *ngIf="key =='wtp'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td (click)="sort('notes')">Notes
+                <span class="glyphicon sort-icon" *ngIf="key =='notes'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </td>
+            <td>Actions</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of Trans | orderBy: 'id' : reverse">
+                <td>{{item.id}}
+                </td>
+                <td>{{item.representative.name}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.due_date}}</td>
+                <td>{{item.customer_name}}</td>
+                <td>{{item.wtp}}</td>
+                <td>{{item.notes}}</td>
+                <td>
+                    <button type="submit" class="btn btn-primary" (click)="updateTran(item)">Update</button>
+                    <button type="submit" class="btn btn-warning" (click)="deleteTran(item.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
