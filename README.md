@@ -6,7 +6,7 @@ This project was generated with [Angular CLI]
 ## Prerequisites 
 
 To run this project you need run first a laravel app in a localhost server so you can able to call the web services that this project needs.
-Laravel app is in https://github.com/malagon91/store.git
+Laravel app is in https://github.com/malagon91/store
 
 ## Development server
 
